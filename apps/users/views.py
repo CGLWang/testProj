@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+# 在这里改了！！！！
 # Create your views here.
 def index(request):
     return render(request,"index.html")
