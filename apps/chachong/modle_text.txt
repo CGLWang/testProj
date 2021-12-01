@@ -1,0 +1,46 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head> 
+  <title>静态文本高亮测试</title>
+</head> 
+<body> 
+<div id="result1">
+  <p>{STRING1}</p>
+
+</div>
+<div id="result2">
+  <p>{STRING2}</p>
+</div>
+
+<script>
+
+function keyLight(id, key, bgColor){
+  var oDiv = document.getElementById(id),
+      sText = oDiv.innerHTML,
+      bgColor = bgColor || "orange",
+      sKey = "<span style='background-color: "+bgColor+";'>"+key+"</span>",
+      num = -1,
+      rStr = new RegExp(key, "g"),
+      rHtml = new RegExp("\<.*?\>","ig"), //匹配html元素
+      aHtml = sText.match(rHtml); //存放html元素的数组
+  sText = sText.replace(rHtml, '{~}');  //替换html标签
+  sText = sText.replace(rStr,sKey); //替换key
+  sText = sText.replace(/{~}/g,function(){  //恢复html标签
+    num++;
+    return aHtml[num];
+  });
+
+  oDiv.innerHTML = sText;
+}
+var array1 = {REPELIST};
+for( j in  array1){
+    keyLight('result1', array1[j]);
+    keyLight('result2', array1[j],'red');
+}
+
+</script>
+
+
+</body> 
+</html>

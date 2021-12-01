@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>政策显示测试</title>
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="/exportfile/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link type="text/css" href="/exportfile/static/bootstrap-3.3.7-dist/css/dashboard.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/exportfile/static/js/jquery-1.12.4.min.js"></script>
+    <script src="/exportfile/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+  </head>
+
+  <body>
+
+    <!-- 添加模态框 -->
+    <div class="modal fade" id="zcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">内容</h4>
+          </div>
+          <div class="modal-body">
+            <p id="zhengcewenben"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">政策<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">政策</h1>
+
+          <div class="table-responsive">
+            <button id="add" type="button" class="btn btn-warning">更新</button>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>时间</th>
+                  <th>标题</th>
+                  <th>内容</th>
+                  <th>附件</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for zc in zhengce %}
+                    <tr>
+                        <td>{{ zc.0 }}</td>
+                        <td>{{ zc.1 }}</td>
+                        <td><button class="chakan">查看</button></td>
+                        <td>{{ zc.3}} {{ zc.4}}</td>
+                        <td hidden="hidden">{{ zc.2 }}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script>
+      $(".chakan").click(function () {
+        {#  数组取出来以后是js对象 #}
+        var td = $(this).parent().parent().children()[4];
+        $("#zhengcewenben").text($(td).text());
+        $("#zcModal").modal({
+          backdrop:"static"
+        });
+      });
+  </script>
+
+  </body>
+</html>

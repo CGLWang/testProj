@@ -1,0 +1,48 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head> 
+  <title>静态文本高亮测试</title>
+</head> 
+<body> 
+<div id="result1">
+  <p>电力调控分中心11楼通信机房地板、天花板、墙面、通信调度台、储物柜等已使用多年，不满足生产需求，影响调控中心对外形象，且不具备系统网络和指标展示功能。主要改造内容：1.通信机房更换防静电活动地板265m2，运维人员办公区活动地板67m2，值班员生活间防滑地砖地面21m2；2.拆除原室内吊顶并更换，共计353m2；3.内墙面粉刷585m2；4.更换储物柜210m2；5.更换机房入口的防火门1扇，更换值班休息室门及门移位；6.将退运的16楼电调值班台和大屏安装在机房，配置铝板大屏隔断墙67.2m2；7.对部分设备进行移位和拆除；8.购置标准机柜式音频配线架，并完成相关音频布线、线缆割接；
+</p>
+
+</div>
+<div id="result2">
+  <p>保障华中电力调控分中心生产工作正常开展，需要对生产设备、设施、临时突发、应急、计划外的一些事件进行修理、维护、故障缺陷处理等工作，以保障生产设备正常可靠运行。
+</p>
+</div>
+
+<script>
+
+function keyLight(id, key, bgColor){
+  var oDiv = document.getElementById(id),
+      sText = oDiv.innerHTML,
+      bgColor = bgColor || "orange",
+      sKey = "<span style='background-color: "+bgColor+";'>"+key+"</span>",
+      num = -1,
+      rStr = new RegExp(key, "g"),
+      rHtml = new RegExp("\<.*?\>","ig"), //匹配html元素
+      aHtml = sText.match(rHtml); //存放html元素的数组
+  sText = sText.replace(rHtml, '{~}');  //替换html标签
+  sText = sText.replace(rStr,sKey); //替换key
+  sText = sText.replace(/{~}/g,function(){  //恢复html标签
+    num++;
+    return aHtml[num];
+  });
+
+  oDiv.innerHTML = sText;
+}
+var array1 = ['进行', '生产', '分中心', '华中', '设备', '电力', '调控'];
+for( j in  array1){
+    keyLight('result1', array1[j]);
+    keyLight('result2', array1[j],'red');
+}
+
+</script>
+
+
+</body> 
+</html>

@@ -1,0 +1,8 @@
+﻿主文件：predict.py
+
+函数：
+def jiqun(proDesc):
+    cnn_model = CnnModel()
+    return('集群类别：',cnn_model.predict(proDesc))
+
+传入项目内容（proDesc），返回集群类别。
